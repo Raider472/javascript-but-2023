@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body id="bod">
+        <h1 id="owo">Yolo</h1>
+        <h2 id="nom">Bonjour</h2>
+        <script>
+            let h1 = document.getElementById("owo");
+            let h2 = document.getElementById("nom");
+            h1.innerHTML = "Yolo"
+            h2.innerHTML = "Bonjour"
+            //
+            let yepa = "Yolo Swag"
+            alert(yepa)
+            document.addEventListener("keypress", (event) => {
+                if (event.key === "s") {
+                    h1.innerHTML = "sale jaaj"
+                }
+                else {
+                    h1.innerHTML = "Yolo Swag"
+                }
+            } )
+            //Ex 2
+            if (confirm("Etes vous un etudiant ?") === true) {
+                alert("vous êtes un étudiants")
+            }
+            else {
+                alert("vous êtes con")
+            }
+            //Ex 3
+            for(let i = true; i !== false; i) {
+                let nom = prompt("quel est votre nom ?")
+                if (confirm("Voulez-vous confirmer ?") === true) {
+                    i = false
+                    if(nom === null) {
+                        nom = "rien"
+                    }
+                    h2.innerHTML += " " + nom
+                }
+                else {
+                    
+                }
+            }
+        </script>
+
+        <input type="button" value="couleur rouge" onclick="changerCouleur('red')">
+        <input type="button" value="couleur bleu" onclick="changerCouleur('blue')">
+        <input type="button" value="cacher le nom" onclick="cacherNom()">
+        <input type="button" value="afficher le nom" onclick="afficherNom()">
+        <script>
+            //Ex4
+            let body = document.getElementById("bod");
+            function changerCouleur(color) {
+                body.style.background = color
+            }
+            function cacherNom() {
+                h2.hidden = true
+            }
+            function afficherNom() {
+                h2.hidden = false
+            }
+
+        </script>
+        
+        <br>
+        <br>
+        <br>
+        <input id="buttonTriangle" type="button" value="5" onclick="creationTriangle(this.value)">
+        <input id="buttonTriangle" type="button" value="10" onclick="creationTriangle(this.value)">
+        <input id="buttonTriangle" type="button" value="15" onclick="creationTriangle(this.value)">
+        <input id="buttonTriangle" type="button" value="reset" onclick="creationTriangle(this.value)">
+        <label for="sliderTriangle">Taille</label>
+        <input id="sliderTriangle" type="range" min="0" max="20" value = "0" onchange="creationTriangle(this.value), document.getElementById('valueTriangle').innerHTML = this.value">
+        <h2> valeur :</h2>
+        <h2 id="valueTriangle"></h2>
+        <h2 id="triangle"></h2>
+        <script>
+            //Ex5
+            let h2Triangle = document.getElementById("triangle");
+            let buttonTriangle = document.getElementById("buttonTriangle");
+            function creationTriangle(parametre) {
+                if (parametre === "reset") {
+                    h2Triangle.innerHTML = "Yepa Gaming"
+                }
+                else {
+                    h2Triangle.innerHTML = ""
+                    for (let i = 0; i < Number(parametre); i++) {
+                        h2Triangle.innerHTML += "*"
+                        for (let j = 0; j < i; j++) {
+                            h2Triangle.innerHTML += "*"
+                        }
+                        h2Triangle.innerHTML += "<br>"
+                    }
+                }
+            } 
+        </script>
+
+        <br>
+        <br>
+        <br>
+        <div style="width:500px;height:100px;border:1px solid black; background-color: red;" onmouseenter="this.style.background='blue'" onmouseleave="this.style.background='red'"></div>
+        <br>
+        <br>
+        <div id="div1" style="width:500px;height:100px;border:1px solid black; background-color: red;" onmouseenter="this.style.background='blue', document.getElementById('div2').style.background='red'" onmouseleave="this.style.background='red', document.getElementById('div2').style.background='blue'"></div>
+        <br>
+        <div id="div2" style="width:500px;height:100px;border:1px solid black; background-color: blue;" onmouseenter="this.style.background='red', document.getElementById('div1').style.background='blue'" onmouseleave="this.style.background='blue', document.getElementById('div1').style.background='red'"></div>
+        <script>
+            let div1 = document.createElement('div1');
+            let div2 = document.createElement('div2');
+        </script>
+    </body>
+</html>
