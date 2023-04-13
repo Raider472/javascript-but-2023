@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>La moselle des jeux</title>
+    <style>
+        #infos {
+            font-size: 2em;
+        }
+
+        #cadre {
+            margin: auto;
+            position: relative;
+            width: 450px;
+            height: 450px;
+            text-align: center;
+            border: solid thin black;
+        }
+
+        #cadre p {
+            margin: 0;
+            display: table-cell;
+            position: relative;
+            height: inherit;
+            width: inherit;
+            font-size: 5em;
+            vertical-align: middle;
+        }
+
+        span {
+            width: 15px;
+            height: 15px;
+            position: fixed;
+            background-color: darkgrey;
+        }
+
+        .transparent {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="infos">Gratter ici --></div>
+    <span class="transparent"></span>
+
+    <div id="cadre">
+        <p id="texte"></p>
+    </div>
+
+    <script type="text/javascript">
+        const GAGNE = 'Gagné';
+        const PERDU = 'Perdu';
+        const CADRE = document.getElementById('cadre');
+        const LARGEUR = CADRE.clientWidth;
+        const TAILLE = document.getElementsByTagName('span')[0].clientWidth;
+
+        console.log(LARGEUR)
+        for(let i = 0; i < LARGEUR/15; i++) {
+            for(let j = 0; j < LARGEUR/15; j++) {
+                let point = document.createElement('span');
+                let div = document.createElement('div');
+                let coordonnésX = 735 + i * 15
+                let coordonnésY = 482 - j * 15
+                point.style.left = String(coordonnésX)+"px"
+                point.style.top = String(coordonnésY)+"px"
+                point.setAttribute("onmouseenter", "rendreInvisible(this)")
+                CADRE.appendChild(point)
+            }
+        }
+
+        let numRand = Math.floor(Math.random() * 100)
+        if (numRand >= 50) {
+            document.getElementById('texte').innerHTML = 'Perdu';
+        }
+        else {
+            document.getElementById('texte').innerHTML = 'Gagné';
+        }
+        function rendreInvisible(id) {
+            id.classList.add("transparent")
+        }
+    </script>
+</body>
+</html>
