@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <p>Jeu du morpion</p>
+    <table>
+        <tr>
+            <td id="1" onmouseenter="numcases = this.id, boolCase = true" onmouseleave="boolCase = false"><img src="../td2/exo1/images/blanc.gif"></td>
+            <td id="2" onmouseenter="numcases = this.id, boolCase = true" onmouseleave="boolCase = false"><img src="../td2/exo1/images/blanc.gif"></td>
+            <td id="3" onmouseenter="numcases = this.id, boolCase = true" onmouseleave="boolCase = false"><img src="../td2/exo1/images/blanc.gif"></td>
+        </tr>
+        <tr>
+            <td id="4" onmouseenter="numcases = this.id, boolCase = true" onmouseleave="boolCase = false"><img src="../td2/exo1/images/blanc.gif"></td>
+            <td id="5" onmouseenter="numcases = this.id, boolCase = true" onmouseleave="boolCase = false"><img src="../td2/exo1/images/blanc.gif"></td>
+            <td id="6" onmouseenter="numcases = this.id, boolCase = true" onmouseleave="boolCase = false"><img src="../td2/exo1/images/blanc.gif"></td>
+        </tr>
+        <tr>
+            <td id="7" onmouseenter="numcases = this.id, boolCase = true" onmouseleave="boolCase = false"><img src="../td2/exo1/images/blanc.gif"></td>
+            <td id="8" onmouseenter="numcases = this.id, boolCase = true" onmouseleave="boolCase = false"><img src="../td2/exo1/images/blanc.gif"></td>
+            <td id="9" onmouseenter="numcases = this.id, boolCase = true" onmouseleave="boolCase = false"><img src="../td2/exo1/images/blanc.gif"></td>
+        </tr>
+    </table>
+</body>
+<script>
+    let numcases = 0
+    let boolCase = false
+    let arrayCase = [];
+    document.addEventListener("keyup", (event) => {
+        if (event.key === "x") {
+            ajouterImageX(numcases)
+        }
+        else if(event.key === "o") {
+            if (boolCase === true) {
+                ajouterImageO(numcases)
+            }
+        }
+    })
+    function ajouterImageX(id) {
+        let idDoc = document.getElementById(id)
+        if (idDoc.classList.value === "intouchable") {
+            alert("tu ne peux point modifier")
+        }
+        else {
+            idDoc.innerHTML = ""
+            let elem = document.createElement("img")
+            elem.setAttribute("src", "./croix.jpg")
+            idDoc.appendChild(elem)
+            idDoc.classList.add("intouchable")
+        }
+    }
+    function ajouterImageO(id) {
+        let idDoc = document.getElementById(id)
+        if (idDoc.classList.value === "intouchable") {
+            alert("tu ne peux point modifier")
+        }
+        else {
+            idDoc.innerHTML = ""
+                let elem = document.createElement("img")
+                elem.setAttribute("src", "./vasily.png")
+                idDoc.appendChild(elem)
+            idDoc.classList.add("intouchable")
+        }
+    }
+</script>
+</html>

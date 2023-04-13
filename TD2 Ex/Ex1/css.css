@@ -1,0 +1,30 @@
+table {
+    width: 100%;
+    height: 500px;
+    text-align: center;
+    border-collapse: collapse;
+}
+table td, table th {
+border: 1px solid #AAAAAA;
+padding: 3px 2px;
+}
+table tbody td {
+font-size: 13px;
+}
+table tfoot td {
+font-size: 14px;
+}
+table tfoot {
+text-align: right;
+}
+table tfoot a{
+display: inline-block;
+background: #1C6EA4;
+color: #FFFFFF;
+padding: 2px 8px;
+border-radius: 5px;
+}
+
+img {
+    width: 10%;
+}
