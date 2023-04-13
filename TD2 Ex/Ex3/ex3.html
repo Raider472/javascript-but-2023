@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+    <section>
+        <div>
+            <img src="./AK12.png" alt="photo de chaton" id="grandeImg" class="imgPrincip"">
+        </div>
+
+        <figure id="miniatures" class="figIMG">
+            <img src="./AK12.png" alt="mini 1" class="mini noir" id="1" onclick="afficherImage(this)">
+            <img src="./AK47.jpg" alt="mini 2" class="mini" id="2" onclick="afficherImage(this)">
+            <img src="./AN.jpg" alt="mini 3" class="mini" id="3" onclick="afficherImage(this)">
+            <img src="./FAMAS.jpg" alt="mini 1" class="mini" id="4" onclick="afficherImage(this)">
+            <img src="./GLOCK.png" alt="mini 2" class="mini" id="5" onclick="afficherImage(this)">
+            <img src="./M24.jpg" alt="mini 3" class="mini" id="6" onclick="afficherImage(this)">
+        </figure>
+    </section>
+</body>
+    <script type="text/javascript">
+        let numImagActu = 0
+        let arrayImage = ["1", "2", "3", "4", "5", "6"]
+        let imgPrincip = document.getElementById("grandeImg")
+        setInterval(changerImageIntervale, 4000);
+        function afficherImage(id) {
+            let imgTouch = id
+            id.classList.add("noir");
+            imgPrincip.src = imgTouch.src
+            numImagActu = Number(id.id)-1
+            removeClass(id)
+        }
+        function changerImageIntervale() {
+            if (numImagActu === arrayImage.length) {
+                numImagActu = 0
+            }
+            else {
+                numImagActu += 1
+            }
+            let doc = document.getElementById(arrayImage[numImagActu])
+            imgPrincip.src = doc.src
+            doc.classList.add("noir");
+            removeClass(doc)
+        }
+        function removeClass(id) {
+            arrayImage.forEach(unArray => { 
+                if(unArray === id.id) {
+
+                } 
+                else {
+                    let doc = document.getElementById(unArray)
+                    doc.classList.remove("noir") 
+                } 
+            } )
+        }
+    </script>
+</html>

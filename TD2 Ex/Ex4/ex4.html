@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+    <section>
+        <div>
+            <img src="./AK12.png" alt="photo de chaton" id="grandeImg" class="imgPrincip"">
+        </div>
+
+        <figure id="miniatures" class="figIMG">
+            <input type="radio" value="./AK12.png" class="mini" name="buttonRD" id="1" onclick="afficherImage(this)">
+            <input type="radio" value="./AK47.jpg" class="mini" name="buttonRD" id="2" onclick="afficherImage(this)">
+            <input type="radio" value="./AN.jpg" class="mini" name="buttonRD" id="3" onclick="afficherImage(this)">
+            <input type="radio" value="./FAMAS.jpg" class="mini" name="buttonRD" id="4" onclick="afficherImage(this)">
+            <input type="radio" value="./GLOCK.png" class="mini" name="buttonRD" id="5" onclick="afficherImage(this)">
+            <input type="radio" value="./M24.jpg" class="mini" name="buttonRD" id="6" onclick="afficherImage(this)">
+        </figure>
+    </section>
+</body>
+    <script type="text/javascript">
+        document.getElementById("1").checked = true
+        let numImagActu = 0
+        let arrayImage = ["1", "2", "3", "4", "5", "6"]
+        let imgPrincip = document.getElementById("grandeImg")
+        setInterval(changerImageIntervale, 1000);
+        function afficherImage(id) {
+            let imgTouch = id
+            imgPrincip.src = imgTouch.value
+            console.log(imgTouch.value)
+            numImagActu = Number(id.id)-1
+        }
+        function changerImageIntervale() {
+            if (numImagActu === arrayImage.length) {
+                numImagActu = 0
+            }
+            else {
+                numImagActu += 1
+            }
+            let doc = document.getElementById(arrayImage[numImagActu])
+            imgPrincip.src = doc.src
+            doc.checked = true
+        }
+    </script>
+</html>
