@@ -25,7 +25,7 @@
         </nav>
 
         <section>
-            <form id="formulaire" action="javascript:verifieurFormulaire();" method="POST"
+            <form id="formulaire" action="javascript:alert('le formulaire est bon');" method="POST"
                   class="form-horizontal">
                 <div class="form-group">
                     <label for="nom" class="col-sm-2 control-label">Nom</label>
@@ -133,7 +133,10 @@
             }
         }
 
-        function verifieurFormulaire() {
+        document.getElementById("formulaire").onsubmit = function () {
+            const regex_nom = /^[a-zA-Z]{2,50}$/
+            const regex_email = /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)$/;
+
             let nom = document.getElementById("nom")
             let nomLab = document.getElementById("erreur-nom")
             nomLab.innerHTML = ""
@@ -160,15 +163,30 @@
                 erreur += "\n"
                 nomLab.innerHTML = "Le nom est vide"
             }
+            else if (!nom.value.match(regex_nom)) {
+                erreur += "Le nom est incorecte"
+                erreur += "\n"
+                nomLab.innerHTML = "Le nom est incorecte"
+            }
             if(prenom.value === "") {
                 erreur += "Le prenom est vide"
                 erreur += "\n"
                 prenomLab.innerHTML = "Le nom est vide"
             }
+            else if (!prenom.value.match(regex_nom)) {
+                erreur += "Le prenom est incorecte"
+                erreur += "\n"
+                prenomLab.innerHTML = "Le prenom est incorecte"
+            }
             if(email.value === "") {
                 erreur += "L'email est vide"
                 erreur += "\n"
                 emailLab.innerHTML = "L'email est vide"
+            }
+            else if (!email.value.match(regex_email)) {
+                erreur += "Le email est incorecte"
+                erreur += "\n"
+                emailLab.innerHTML = "Le email est incorecte"
             }
             if(depart.value === "") {
                 erreur += "Le departement vide"
@@ -182,11 +200,13 @@
             }
             if (erreur != "" ) {
                 alert(erreur)
+                return false
             }
             else {
-                alert("votre formulaire est correct")
+                return true
             }
         }
+
     </script>
 </body>
 </html>
