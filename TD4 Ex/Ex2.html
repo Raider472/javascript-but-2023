@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header id="Head"></header>
+    <button onclick="fetchHeader()">Afficher le Header</button>
+    <button onclick="fetchFooter()">Afficher le Footer</button>
+    <footer id="Footer"></footer>
+    <script>
+        function fetchHeader() {
+            fetch("Ex22.html")
+                .then(function (reponse) {
+                    console.log(reponse)
+                    if(reponse.ok) {
+                        return reponse.text()
+                    }
+                    else {
+                        alert("Yepa awaits")
+                    }
+                })
+                .then(function (html) {
+                    let parser = new DOMParser()
+                    let doc = parser.parseFromString(html, "text/html")
+                    let id = doc.getElementById("headerFragment").innerText
+                    document.getElementById("Head").innerHTML = id
+                })
+                .catch(function (err) {
+                    alert("souci" + err)
+                    return false
+                })
+        }
+
+        function fetchFooter() {
+            fetch("Ex22.html")
+                .then(function (reponse) {
+                    console.log(reponse)
+                    if(reponse.ok) {
+                        return reponse.text()
+                    }
+                    else {
+                        alert("Yepa awaits")
+                    }
+                })
+                .then(function (html) {
+                    let parser = new DOMParser()
+                    let doc = parser.parseFromString(html, "text/html")
+                    let id = doc.getElementById("footerFragment").innerHTML
+                    document.getElementById("Footer").innerHTML = id
+                })
+                .catch(function (err) {
+                    alert("souci" + err)
+                    return false
+                })
+        }
+    </script>
+</body>
+</html>

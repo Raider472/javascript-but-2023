@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="fetchAjax()">Effectuer une requête AJAX</button>
+    <div id="demo"></div>
+    <script>
+        /*function fetchAjax() {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    alert(this.responseText);
+                }
+            };
+            xhttp.open("GET", URL, true);
+            xhttp.send();
+        }*/
+        const URL = "Ex11.html";
+        /*function fetchAjax() {
+            fetch(URL)
+                .then(function (response) {
+                    console.log(response);
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    else {
+                        alert("souci")
+                    }
+                })
+                .then(function (test) {
+                    alert(test)
+                })
+                .catch(function (err) {
+                    alert("souci" + err)
+                    return false
+                })
+        }*/
+        async function fetchAjax() {
+            try {
+                const respons = await fetch(URL)
+                alert(await respons.text())
+            }
+            catch (e) {
+                alert(e.message)
+            }
+        }
+    </script>
+</body>
+</html>

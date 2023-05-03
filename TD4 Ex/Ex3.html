@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JavaScript - TD4 - exo3</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../td4/lib/bootstrap.min.css">
+    <style>
+        select {
+            min-width: 15em;
+            border-radius: 5px;
+            background-color: white;
+            -webkit-appearance: button;
+            -webkit-padding-end: 20px;
+            -webkit-padding-start: 2px;
+            -moz-appearance: button;
+            -moz-padding-end: 20px;
+            -moz-padding-start: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav navbar">
+            <h2>Mon formulaire</h2>
+        </nav>
+
+        <section>
+            <form id="formulaire" action="javascript:verifieurFormulaire();" method="POST"
+                  class="form-horizontal">
+                <div class="form-group">
+                    <label for="nom" class="col-sm-2 control-label">Nom</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="nom" name="nom" placeholder="Dylan">
+                        <div id="erreur-nom" class="text-danger"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="prenom" class="col-sm-2 control-label">Prénom</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="prenom" name="prenom" placeholder="Bob">
+                        <div id="erreur-prenom" class="text-danger"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="email" name="email" placeholder="bob@dylan.net">
+                        <div id="erreur-email" class="text-danger"></div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="form-group">
+                    <label for="departement" class="col-sm-2 control-label">Département</label>
+                    <div class="col-sm-10">
+                        <select id="departement" name="departement" onchange="fetchVille(this.value)">
+                            <option value="">Choisir un département</option>
+                        </select>
+                        <div id="erreur-departement" class="text-danger"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ville" class="col-sm-2 control-label">Ville</label>
+                    <div class="col-sm-10">
+                        <select id="ville" name="ville"></select>
+                        <div id="erreur-ville" class="text-danger"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button class="btn btn-primary" type="submit">Valider</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div> <!-- fin .container -->
+
+    <script>
+        window.onload = function() {
+            fetchDepart();
+            console.log("Test")
+        };
+        let URL = "https://geo.api.gouv.fr/departements"
+        function fetchDepart() {
+            fetch(URL)
+                .then(function (response) {
+                    if(response.ok) {
+                        return response.json()
+                    }
+                    else {
+                        alert("problème")
+                    }
+                })
+                .then(function (depart) {
+                    console.log(depart)
+                    let selectDepart = document.getElementById("departement")
+                    for(let i = 0; i < depart.length; i++) {
+                        let option = new Option(depart[i].nom, depart[i].code)
+                        selectDepart.add(option)
+                    }
+                })
+        }
+
+        function fetchVille(code) {
+            console.log(code)
+            const URL = "https://geo.api.gouv.fr/departements/" + code + "/communes"
+            let selectVille = document.getElementById("ville")
+            selectVille.innerHTML = ""
+            if (code != "") {
+                fetch(URL)
+                    .then(function (response) {
+                        if(response.ok) {
+                            return response.json()
+                        }
+                        else {
+                            alert("problème")
+                        }
+                    })
+                    .then(function (ville) {
+                        console.log(ville)
+                        let optionBase = new Option("Veuillez choisir une ville", "")
+                        selectVille.add(optionBase)
+                        for(let i = 0; i < ville.length; i++) {
+                            let option = new Option(ville[i].nom + " (" + ville[i].code + ")", ville[i].code)
+                            selectVille.add(option)
+                        }
+                    })
+            }
+        }
+
+        function verifieurFormulaire() {
+            let nom = document.getElementById("nom")
+            let nomLab = document.getElementById("erreur-nom")
+            nomLab.innerHTML = ""
+
+            let prenom = document.getElementById("prenom")
+            let prenomLab = document.getElementById("erreur-prenom")
+            prenomLab.innerHTML = ""
+
+            let email = document.getElementById("email")
+            let emailLab = document.getElementById("erreur-email")
+            emailLab.innerHTML = ""
+
+            let depart = document.getElementById("departement")
+            let departLab = document.getElementById("erreur-departement")
+            departLab.innerHTML = ""
+
+            let ville = document.getElementById("ville")
+            let villeLab = document.getElementById("erreur-ville")
+            villeLab.innerHTML = ""
+
+            let erreur = ""
+            if(nom.value === "") {
+                erreur += "Le nom est vide"
+                erreur += "\n"
+                nomLab.innerHTML = "Le nom est vide"
+            }
+            if(prenom.value === "") {
+                erreur += "Le prenom est vide"
+                erreur += "\n"
+                prenomLab.innerHTML = "Le nom est vide"
+            }
+            if(email.value === "") {
+                erreur += "L'email est vide"
+                erreur += "\n"
+                emailLab.innerHTML = "L'email est vide"
+            }
+            if(depart.value === "") {
+                erreur += "Le departement vide"
+                erreur += "\n"
+                departLab.innerHTML = "Le departement vide"
+            }
+            if(ville.value === "") {
+                erreur += "La ville est vide"
+                erreur += "\n"
+                villeLab.innerHTML = "La ville est vide"
+            }
+            if (erreur != "" ) {
+                alert(erreur)
+            }
+            else {
+                alert("votre formulaire est correct")
+            }
+        }
+    </script>
+</body>
+</html>
